@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "163656189400",
+    "project_id": "ai-powered-product-recognition",
+    "storage_bucket": "ai-powered-product-recognition.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:163656189400:android:9e81885d8be27dcc639ead",
+        "android_client_info": {
+          "package_name": "com.example.ai_product_recognition"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "163656189400-oro5o43iff30sduep332o9h7bnnmm0qh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHeW_jGuLLY-ba_53XHmUd71NyZ2Lr7mo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "163656189400-oro5o43iff30sduep332o9h7bnnmm0qh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "163656189400-bbgep8cg7rm0klec95hr9jecb25735eo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.aiProductRecognition"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
