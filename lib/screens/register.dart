@@ -6,6 +6,8 @@ import 'login.dart';
 import '../widgets/bottom_nav.dart';
 
 class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
+
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }

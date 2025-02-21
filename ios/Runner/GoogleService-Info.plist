@@ -3,9 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>163656189400-bbgep8cg7rm0klec95hr9jecb25735eo.apps.googleusercontent.com</string>
+	<string>163656189400-ctkce1lohbvtdjms0bn0jc2d34kt7lpl.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.163656189400-bbgep8cg7rm0klec95hr9jecb25735eo</string>
+	<string>com.googleusercontent.apps.163656189400-ctkce1lohbvtdjms0bn0jc2d34kt7lpl</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>163656189400-ngdku35v6lcf5qs44cciujanoueadsri.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDFgjmwNgbgpPoq9liXp4L0WfzrCFyEvmI</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.aiProductRecognition</string>
+	<string>com.example.aiPoweredMarketplace</string>
 	<key>PROJECT_ID</key>
 	<string>ai-powered-product-recognition</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:163656189400:ios:e5088b6b7f1deed4639ead</string>
+	<string>1:163656189400:ios:338e225a36b8d909639ead</string>
 </dict>
 </plist>
