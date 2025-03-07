@@ -1,87 +1,26 @@
 {
   "project_info": {
-    "project_number": "163656189400",
-    "project_id": "ai-powered-product-recognition",
-    "storage_bucket": "ai-powered-product-recognition.firebasestorage.app"
+    "project_number": "95510882430",
+    "project_id": "ai-powered-marketplace3",
+    "storage_bucket": "ai-powered-marketplace3.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:163656189400:android:e98db540889910d6639ead",
+        "mobilesdk_app_id": "1:95510882430:android:502a11069e099d7fac902f",
         "android_client_info": {
           "package_name": "com.example.ai_powered_marketplace"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "163656189400-oro5o43iff30sduep332o9h7bnnmm0qh.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBHeW_jGuLLY-ba_53XHmUd71NyZ2Lr7mo"
+          "current_key": "AIzaSyAApt32N1klPQRXfp2-4OyqyEkdDm70abk"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "163656189400-oro5o43iff30sduep332o9h7bnnmm0qh.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "163656189400-bbgep8cg7rm0klec95hr9jecb25735eo.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.aiProductRecognition"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:163656189400:android:9e81885d8be27dcc639ead",
-        "android_client_info": {
-          "package_name": "com.example.ai_product_recognition"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "163656189400-ngdku35v6lcf5qs44cciujanoueadsri.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.ai_product_recognition",
-            "certificate_hash": "0ba59c9bd7849e1206ba845678293226c853bfca"
-          }
-        },
-        {
-          "client_id": "163656189400-oro5o43iff30sduep332o9h7bnnmm0qh.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBHeW_jGuLLY-ba_53XHmUd71NyZ2Lr7mo"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "163656189400-oro5o43iff30sduep332o9h7bnnmm0qh.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "163656189400-bbgep8cg7rm0klec95hr9jecb25735eo.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.aiProductRecognition"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
