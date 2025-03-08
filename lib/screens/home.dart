@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+import 'upload_product.dart';
 import 'login.dart';
 
 class HomePage extends StatefulWidget {
@@ -50,6 +53,21 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  /// **Select Image and Navigate to Upload Page**
+  Future<void> _pickImage() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+
+    if (image != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => UploadProductPage(imageFile: File(image.path)),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,9 +90,17 @@ class _HomePageState extends State<HomePage> {
                           fontWeight: FontWeight.bold,
                           color: Colors.black),
                     ),
-                    IconButton(
-                      icon: Icon(Icons.logout, color: Colors.black),
-                      onPressed: _logout,
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.upload, color: Colors.black),
+                          onPressed: _pickImage,
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.logout, color: Colors.black),
+                          onPressed: _logout,
+                        ),
+                      ],
                     ),
                   ],
                 ),
