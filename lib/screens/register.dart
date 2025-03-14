@@ -109,6 +109,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                 validator: (value) => value!.isEmpty
                                     ? "Enter your first name"
                                     : null,
+                                style: TextStyle(
+                                    fontSize: 14, color: Colors.black),
                               ),
                             ),
                             SizedBox(width: 10),
@@ -120,6 +122,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                 validator: (value) => value!.isEmpty
                                     ? "Enter your last name"
                                     : null,
+                                style: TextStyle(
+                                    fontSize: 14, color: Colors.black),
                               ),
                             ),
                           ],
@@ -132,6 +136,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           decoration: InputDecoration(labelText: "Username"),
                           validator: (value) =>
                               value!.isEmpty ? "Enter a username" : null,
+                          style: TextStyle(fontSize: 14, color: Colors.black),
                         ),
                         SizedBox(height: 15),
 
@@ -141,6 +146,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           decoration: InputDecoration(labelText: "Email"),
                           validator: (value) =>
                               value!.isEmpty ? "Enter a valid email" : null,
+                          style: TextStyle(fontSize: 14, color: Colors.black),
                         ),
                         SizedBox(height: 15),
 
@@ -152,6 +158,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           validator: (value) => value!.length < 6
                               ? "Password must be 6+ characters"
                               : null,
+                          style: TextStyle(fontSize: 14, color: Colors.black),
                         ),
                         SizedBox(height: 25),
 
@@ -176,7 +183,12 @@ class _RegisterPageState extends State<RegisterPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text("Already have an account? "),
+                            Text(
+                              "Already have an account? ",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black),
+                            ),
                             GestureDetector(
                               onTap: () {
                                 Navigator.pushReplacement(

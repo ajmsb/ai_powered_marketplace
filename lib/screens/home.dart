@@ -116,6 +116,7 @@ class _HomePageState extends State<HomePage> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
+                  style: TextStyle(fontSize: 14, color: Colors.black),
                 ),
               ],
             ),
