@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:firebase_app_check/firebase_app_check.dart';
 import 'home.dart';
 import 'register.dart';
 import '../widgets/bottom_nav.dart';
@@ -19,6 +20,16 @@ class _LoginPageState extends State<LoginPage> {
 
   Future<void> _signIn() async {
     try {
+      // Adding Firebase App Check token (if not already activated)
+      /* final appCheckToken = await FirebaseAppCheck.instance.getToken();
+
+      if (appCheckToken == null) {
+        setState(() {
+          errorMessage = "App Check token retrieval failed.";
+        });
+        return;
+      } */
+
       await _auth.signInWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
@@ -79,6 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
+              style: TextStyle(fontSize: 14, color: Colors.black),
             ),
             SizedBox(height: 10),
             TextField(
@@ -94,6 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
+              style: TextStyle(fontSize: 14, color: Colors.black),
             ),
             SizedBox(height: 10),
             if (errorMessage.isNotEmpty)

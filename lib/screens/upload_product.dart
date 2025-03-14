@@ -62,6 +62,7 @@ class _UploadProductPageState extends State<UploadProductPage> {
                     hintText: "AI Generated Title",
                     border: OutlineInputBorder(),
                   ),
+                  style: TextStyle(fontSize: 12, color: Colors.black),
                 ),
                 SizedBox(height: 10),
 
@@ -73,13 +74,17 @@ class _UploadProductPageState extends State<UploadProductPage> {
                     hintText: "Price",
                     border: OutlineInputBorder(),
                   ),
+                  style: TextStyle(fontSize: 14, color: Colors.black),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 20, width: 10),
 
                 /// **About This Product**
                 Text(
                   "About this product",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: Colors.black),
                 ),
                 SizedBox(height: 10),
 
@@ -91,6 +96,7 @@ class _UploadProductPageState extends State<UploadProductPage> {
                     hintText: "AI Generated Description",
                     border: OutlineInputBorder(),
                   ),
+                  style: TextStyle(fontSize: 14, color: Colors.black),
                 ),
               ],
             ),
