@@ -1,0 +1,1 @@
+C:\dev\ai_powered_marketplace\build\app\intermediates\cxx\RelWithDebInfo\3u4a3u35\obj\x86_64

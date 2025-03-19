@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:ai_powered_marketplace/widgets/bottom_nav.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
-import 'dart:io';
+import 'package:flutter/material.dart';
 import 'upload_product.dart';
-import 'login.dart';
+import 'product_list.dart'; // Import the product list page
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,8 +14,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String firstName = "User";
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  String firstName = "User"; // Default placeholder
 
   @override
   void initState() {
@@ -23,34 +23,22 @@ class _HomePageState extends State<HomePage> {
     _fetchUserData();
   }
 
-  /// **Fetch First Name from Firebase**
   Future<void> _fetchUserData() async {
     User? user = _auth.currentUser;
     if (user != null) {
-      try {
-        DocumentSnapshot userDoc = await FirebaseFirestore.instance
-            .collection('users')
-            .doc(user.uid)
-            .get();
-
-        if (userDoc.exists) {
-          setState(() {
-            firstName = userDoc['firstName'] ?? "User";
-          });
-        }
-      } catch (e) {
-        print("Error fetching user data: $e");
+      var userDoc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .get();
+      if (userDoc.exists) {
+        setState(() => firstName = userDoc['firstName'] ?? "User");
       }
     }
   }
 
-  /// **Logout User**
   void _logout() async {
     await _auth.signOut();
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => LoginPage()),
-    );
+    Navigator.pushReplacementNamed(context, "/login");
   }
 
   /// **Select Image and Navigate to Upload Page**
@@ -62,7 +50,7 @@ class _HomePageState extends State<HomePage> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => UploadProductPage(imageFile: File(image.path)),
+          builder: (context) => UploadProductPage(imageUrl: image.path),
         ),
       );
     }
@@ -71,111 +59,124 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // White background
-      body: Stack(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text("Hello, $firstName"),
+        actions: [
+          // List icon (Navigates to Product List)
+          IconButton(
+            icon: Icon(Icons.list),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProductListPage()),
+              );
+            },
+          ),
+          // Upload icon
+          IconButton(
+            icon: Icon(Icons.upload),
+            onPressed: _pickImage,
+          ),
+          // Logout icon
+          IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: _logout,
+          ),
+        ],
+      ),
+      body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 100), // Space at the top
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Hello, $firstName",
-                      style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
-                    ),
-                    Row(
-                      children: [
-                        IconButton(
-                          icon: Icon(Icons.upload, color: Colors.black),
-                          onPressed: _pickImage,
-                        ),
-                        IconButton(
-                          icon: Icon(Icons.logout, color: Colors.black),
-                          onPressed: _logout,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20),
-                TextField(
-                  decoration: InputDecoration(
-                    hintText: "Search...",
-                    prefixIcon: Icon(Icons.search, color: Colors.black),
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black, width: 1),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                  style: TextStyle(fontSize: 14, color: Colors.black),
-                ),
-              ],
+          TextField(
+            decoration: InputDecoration(
+              hintText: "Search...",
+              prefixIcon: Icon(Icons.search, color: Colors.black),
+              filled: true,
+              fillColor: Colors.white,
+              border: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.black, width: 1),
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
             ),
           ),
-
-          /// **Bottom Navigation Bar & FAB**
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Stack(
-              alignment: Alignment.bottomCenter,
-              clipBehavior: Clip.none, // Ensures FAB is in front
-              children: [
-                /// **FAB Icon (Now in Front)**
-                Positioned(
-                  top: -35, // Ensuring full visibility
-                  child: FloatingActionButton(
-                    onPressed: () {},
-                    backgroundColor: Colors.black,
-                    shape: CircleBorder(
-                      side: BorderSide(color: Colors.white, width: 4),
-                    ),
-                    child: Icon(Icons.add, color: Colors.white, size: 30),
+          Expanded(
+            child: StreamBuilder(
+              stream: FirebaseFirestore.instance
+                  .collection('products')
+                  .where('userId', isEqualTo: _auth.currentUser?.uid)
+                  .snapshots(),
+              builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (!snapshot.hasData) {
+                  return Center(child: CircularProgressIndicator());
+                }
+                return GridView.builder(
+                  padding: EdgeInsets.all(8), // Small spaces around tiles
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 8, // Horizontal space
+                    mainAxisSpacing: 8, // Vertical space
+                    childAspectRatio: 1,
                   ),
+                  itemCount: snapshot.data!.docs.length,
+                  itemBuilder: (context, index) {
+                    var product = snapshot.data!.docs[index];
+                    return GestureDetector(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => UploadProductPage(
+                            productId: product.id,
+                            imageUrl: product['imageUrl'],
+                            initialTitle: product['title'],
+                            initialPrice: product['price'],
+                            initialDescription: product['description'],
+                          ),
+                        ),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.network(product['imageUrl'],
+                            fit: BoxFit.cover),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: Stack(
+        clipBehavior: Clip.none, // Allows FAB to overflow navbar
+        alignment: Alignment.bottomCenter,
+        children: [
+          BottomNavBar(selectedIndex: 0, onItemTapped: (index) {}),
+          Positioned(
+            bottom: 35, // Adjusted to ensure full visibility
+            child: Container(
+              width: 70, // Ensures proper circular FAB with border
+              height: 70,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                    color: Colors.white, width: 4), // Thick white border
+                color: Colors.black, // Black background
+              ),
+              child: FloatingActionButton(
+                onPressed: () {},
+                backgroundColor: Colors.black, // Ensure black background
+                shape: CircleBorder(
+                  side: BorderSide(color: Colors.white, width: 4),
                 ),
-
-                /// **Bottom Navigation Bar**
-                Container(
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(15),
-                      topRight: Radius.circular(15),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.home, color: Colors.white),
-                        onPressed: () {},
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.favorite, color: Colors.white),
-                        onPressed: () {},
-                      ),
-                      SizedBox(width: 60), // Space for FAB
-                      IconButton(
-                        icon: Icon(Icons.email, color: Colors.white),
-                        onPressed: () {},
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.person, color: Colors.white),
-                        onPressed: () {},
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+                elevation: 8, // Ensures it's in front
+                child: Icon(Icons.add,
+                    color: Colors.white, size: 32), // Plus (+) icon
+              ),
             ),
           ),
         ],
