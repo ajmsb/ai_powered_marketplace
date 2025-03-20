@@ -63,7 +63,7 @@ class ProductListPage extends StatelessWidget {
                             ),
                             SizedBox(height: 5),
                             Text(
-                              "₦${product['price']}",
+                              "EUR ${product['price']}",
                               style: TextStyle(
                                 color: Colors.green,
                                 fontWeight: FontWeight.bold,

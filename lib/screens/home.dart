@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'upload_product.dart';
 import 'product_list.dart'; // Import the product list page
+import 'dart:io';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,6 +17,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String firstName = "User";
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  File? _imageFile;
 
   @override
   void initState() {
@@ -47,10 +49,13 @@ class _HomePageState extends State<HomePage> {
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
 
     if (image != null) {
+      setState(() {
+        _imageFile = File(image.path);
+      });
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => UploadProductPage(imageUrl: image.path),
+          builder: (context) => UploadProductPage(imageUrl: _imageFile?.path),
         ),
       );
     }
