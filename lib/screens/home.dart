@@ -81,7 +81,13 @@ class _HomePageState extends State<HomePage> {
           // Upload icon
           IconButton(
             icon: Icon(Icons.upload),
-            onPressed: _pickImage,
+            onPressed: //_pickImage,
+                () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => UploadProductPage()),
+              );
+            },
           ),
           // Logout icon
           IconButton(
